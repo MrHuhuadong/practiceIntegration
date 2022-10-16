@@ -1,4 +1,4 @@
-//全选复选框操作
+//将价格输出函数封装
 function addPrices1() {
   let priceNum = 0;
   let price;
@@ -19,49 +19,73 @@ function addPrices1() {
   $(".sums>em")[0].innerText = priceNum;
   $(".nums>em")[0].innerText = num;
 }
-function checkboxAll(dom) {
-  $(dom).on("click", function (e) {
-    if (e.target.tagName === "INPUT") {
-      let check = true;
-      if ($(e.target).attr("class") == "checkAll") {
-        for (const item of $(".checkAll")) {
-          item.checked = !item.checked;
-        }
-        e.target.checked = !e.target.checked;
-        $(".checkItem").map(function (index, item) {
-          item.checked = e.target.checked;
-          if (item.checked) {
-            addPrices1();
-          } else {
-            addPrices1();
-          }
-        });
-      } else {
-        //处理单选框
-        $(".checkItem").map(function (index, item) {
-          if (!item.checked) {
-            check = false;
-            addPrices1();
-          } else {
-            addPrices1();
-          }
-        });
-        if (check) {
-          for (const item of $(".checkAll")) {
-            item.checked = check;
-          }
-        } else {
-          for (const item of $(".checkAll")) {
-            item.checked = check;
-          }
-        }
-      }
-    } else {
-      return;
-    }
+//全选复选框操作简化版
+function checkboxAll() {
+  //处理全选
+  $(".checkAll").change(function () {
+    $(":checkbox").not($(this)).prop("checked", this.checked);
+    addPrices1();
   });
+
+  //处理单个选中和取消
+  $(".checkItem").change(function () {
+    let checkAl = true;
+    for (const item of $(".checkItem")) {
+      if (!item.checked) {
+        console.log("Check");
+        checkAl = false;
+      }
+    }
+    if (checkAl) {
+      $(".checkAll").prop("checked", true);
+    } else {
+      $(".checkAll").prop("checked", false);
+    }
+    addPrices1();
+  });
+
+  // $(dom).on("click", function (e) {
+  //   if (e.target.tagName === "INPUT") {
+  //     let check = true;
+  //     if ($(e.target).attr("class") == "checkAll") {
+  //       for (const item of $(".checkAll")) {
+  //         item.checked = !item.checked;
+  //       }
+  //       e.target.checked = !e.target.checked;
+  //       $(".checkItem").map(function (index, item) {
+  //         item.checked = e.target.checked;
+  //         if (item.checked) {
+  //           addPrices1();
+  //         } else {
+  //           addPrices1();
+  //         }
+  //       });
+  //     } else {
+  //       //处理单选框
+  //       $(".checkItem").map(function (index, item) {
+  //         if (!item.checked) {
+  //           check = false;
+  //           addPrices1();
+  //         } else {
+  //           addPrices1();
+  //         }
+  //       });
+  //       if (check) {
+  //         for (const item of $(".checkAll")) {
+  //           item.checked = check;
+  //         }
+  //       } else {
+  //         for (const item of $(".checkAll")) {
+  //           item.checked = check;
+  //         }
+  //       }
+  //     }
+  //   } else {
+  //     return;
+  //   }
+  // });
 }
-checkboxAll("#cart");
+checkboxAll();
 
 //增加数量
 function addNum() {
