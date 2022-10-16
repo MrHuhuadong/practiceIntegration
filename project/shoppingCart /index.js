@@ -43,47 +43,6 @@ function checkboxAll() {
     }
     addPrices1();
   });
-
-  // $(dom).on("click", function (e) {
-  //   if (e.target.tagName === "INPUT") {
-  //     let check = true;
-  //     if ($(e.target).attr("class") == "checkAll") {
-  //       for (const item of $(".checkAll")) {
-  //         item.checked = !item.checked;
-  //       }
-  //       e.target.checked = !e.target.checked;
-  //       $(".checkItem").map(function (index, item) {
-  //         item.checked = e.target.checked;
-  //         if (item.checked) {
-  //           addPrices1();
-  //         } else {
-  //           addPrices1();
-  //         }
-  //       });
-  //     } else {
-  //       //处理单选框
-  //       $(".checkItem").map(function (index, item) {
-  //         if (!item.checked) {
-  //           check = false;
-  //           addPrices1();
-  //         } else {
-  //           addPrices1();
-  //         }
-  //       });
-  //       if (check) {
-  //         for (const item of $(".checkAll")) {
-  //           item.checked = check;
-  //         }
-  //       } else {
-  //         for (const item of $(".checkAll")) {
-  //           item.checked = check;
-  //         }
-  //       }
-  //     }
-  //   } else {
-  //     return;
-  //   }
-  // });
 }
 checkboxAll();
 
@@ -94,10 +53,6 @@ function addNum() {
     $(item).on("click", function (e) {
       let arr1 = [];
       e.preventDefault();
-      if ($(".txt")[index].value >= 5) {
-        // console.log("限购5个");
-        return;
-      }
       $(".txt")[index].value++;
       const aa = +$(".price>em")[index].innerText.split("￥")[1];
       let priceNum = ($(".txt")[index].value * aa).toFixed(1);
